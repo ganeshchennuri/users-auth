@@ -8,9 +8,8 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'users_app/index.html')
 
+
 def register(request):
-    registered = False
-    
     if request.method == "POST":
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
@@ -27,17 +26,17 @@ def register(request):
                 profile.profile_pic = request.FILES['profile_pic']
             
             profile.save()
-            registered = True
+            return HttpResponseRedirect(reverse('users-app:login'))
         else:
             print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
     return render(request,'users_app/register.html',{
-        'registered': registered,
-        'user_form' : user_form,     
+        'user_form' : user_form,
         'profile_form': profile_form
     })
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -54,6 +53,7 @@ def user_login(request):
         else:
             return HttpResponse('INVALID LOGIN CREDENTIALS')
     return render(request, 'users_app/login.html')
+
 
 @login_required
 def user_logout(request):

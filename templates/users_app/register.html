@@ -4,20 +4,14 @@
     <title>Register Page</title>
 {% endblock %}
 {% block body %}
-    <div class="jumbotron">
-        <h1>Welcome! to Register Page</h1>
-    </div>
+    <h1>Welcome! to Register Page</h1>
     <br><br>
-    {% if registered %}
-        <h2>Thank You!! for registering </h2>
-    {% else %}
-        <h4>Fill the Below form registering </h4>
-        <br>
-        <form enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            <input type="submit" value="Register" class="btn-primary" style="margin-left: 12%; font-size: large;">
-        </form>
-    {% endif %}
+    <h4>Fill the below registration form</h4>
+    <br>
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <input type="submit" value="Register" class="btn-primary" style="margin-left: 12%; font-size: large;">
+    </form>
 {% endblock %}

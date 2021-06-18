@@ -4,10 +4,11 @@
     <title>Login Page</title>
 {% endblock %}
 {% block body %}
-    <div class="jumbotron">
-        <h1>Welcome! to Login Page</h1>
-    </div>
-    <br><br>
+    {% if registered %}
+        <h5>Thank You!! for registering </h5>
+    {% endif %} 
+    <h1>Welcome! to Login Page</h1>
+    <br>
     <form action="{% url 'users-app:login' %}" method="POST">
         {% csrf_token %}
         <label for="username">Username : </label>
